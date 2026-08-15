@@ -35,7 +35,7 @@
     "vite": "^8.0.16"
   },
   "dependencies": {
-    "@ampatspell/tiny": "^0.0.4",
+    "@ampatspell/tiny": "^0.0.5",
     "kysely": "^0.29.5",
     "valibot": "^1.4.2"
   }
