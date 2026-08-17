@@ -1,6 +1,6 @@
 import { query } from '$app/server';
 import { sql } from 'kysely';
-import { getDatabase } from '@ampatspell/tiny/server/handle';
+import { getDatabase } from './services';
 
 export const getMessage = query(async () => {
   const db = getDatabase();

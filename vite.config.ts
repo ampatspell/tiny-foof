@@ -16,8 +16,8 @@ export default defineConfig({
         explicitEnvironmentVariables: true,
         handleRenderingErrors: true,
         remoteFunctions: true,
-        sendWarningsToBrowser: true
-      }
-    })
-  ]
+        sendWarningsToBrowser: true,
+      },
+    }),
+  ],
 });
