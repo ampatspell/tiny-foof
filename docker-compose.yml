@@ -1,6 +1,5 @@
 services:
   foof:
-    container_name: foof
     build: .
     pull_policy: build
     environment:
