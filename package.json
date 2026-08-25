@@ -35,13 +35,13 @@
     "vite": "^8.0.16"
   },
   "dependencies": {
-    "@ampatspell/tiny": "^0.2.1",
+    "@ampatspell/tiny": "^0.2.3",
     "better-sqlite3": "^12.11.1",
     "kysely": "^0.29.5",
     "valibot": "^1.4.2"
   },
   "engines": {
-    "node": ">=26"
+    "node": ">=24.19.0"
   },
   "allowScripts": {
     "@parcel/watcher@2.6.0": true,
