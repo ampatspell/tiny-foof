@@ -1,6 +1,6 @@
 <script lang="ts">
   import favicon from '$lib/assets/favicon.svg';
-  import Dark from '@ampatspell/tiny/components/dark.svelte';
+  import Dark from '@ampatspell/tiny/dark.svelte';
 
   let { children } = $props();
 </script>

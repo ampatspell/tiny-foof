@@ -1,8 +1,6 @@
-FROM node:24-alpine
+FROM node:26-alpine
 
 WORKDIR /app
-
-ARG GITHUB_TOKEN
 
 RUN apk update
 RUN apk add --no-cache coreutils curl
