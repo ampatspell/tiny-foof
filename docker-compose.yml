@@ -1,5 +1,5 @@
 services:
-  /Users/ampatspell/src/tinies:
+  foof:
     build: .
     pull_policy: build
     environment:
