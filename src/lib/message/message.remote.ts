@@ -1,4 +1,4 @@
-import { getDatabase } from '#lib/getters.js';
+import { getDatabase } from '#lib/services.js';
 import { command, query } from '$app/server';
 import { uid } from '@ampatspell/tiny/server/utils';
 import type { QueryResponse } from '@ampatspell/tiny/utils/utils';
