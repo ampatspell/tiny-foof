@@ -1,19 +1,8 @@
 <script lang="ts">
-  import { getMessage } from '$lib/hello.remote';
-
-  let message = $derived(await getMessage());
+  import Public from '#lib/message/public.svelte';
+  import Tiny from '@ampatspell/tiny/tiny';
 </script>
 
-<div class="page">
-  <div class="welcome">{message}</div>
-</div>
-
-<style lang="scss">
-  .page {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-</style>
+<Tiny>
+  <Public />
+</Tiny>

@@ -13,16 +13,22 @@ export interface FileVariant {
   width: number | null;
 }
 
+export interface Message {
+  id: string;
+  message: string;
+}
+
 export interface User {
   email: string;
   hash: string | null;
   id: string;
+  role: string;
   salt: string | null;
-  type: string;
 }
 
 export interface DB {
   files: File;
   fileVariants: FileVariant;
+  messages: Message;
   users: User;
 }

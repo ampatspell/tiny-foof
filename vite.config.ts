@@ -7,16 +7,10 @@ export default defineConfig({
     sveltekit({
       compilerOptions: {
         runes: true,
-        experimental: {
-          async: true,
-        },
+        experimental: { async: true },
       },
       adapter: adapter(),
-      experimental: {
-        remoteFunctions: true,
-        explicitEnvironmentVariables: true,
-        handleRenderingErrors: true,
-      },
+      experimental: { remoteFunctions: true },
     }),
   ],
 });

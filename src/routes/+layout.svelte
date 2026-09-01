@@ -1,14 +1,15 @@
 <script lang="ts">
-  import favicon from '$lib/assets/favicon.svg';
-  import Dark from '@ampatspell/tiny/dark.svelte';
+  import { validatePrefix } from '@ampatspell/tiny/auth/guard/validate';
+  import Entrypoint from '@ampatspell/tiny/entrypoint';
 
   let { children } = $props();
+
+  let validate = validatePrefix({
+    prefix: '/_admin',
+    role: 'admin',
+  });
 </script>
 
-<svelte:head>
-  <link rel="icon" href={favicon} />
-</svelte:head>
-
-<Dark>
+<Entrypoint {validate}>
   {@render children()}
-</Dark>
+</Entrypoint>
