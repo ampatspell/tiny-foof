@@ -4,16 +4,17 @@ import { useDataFields } from '@ampatspell/tiny/fields/data';
 import { notBlank } from '@ampatspell/tiny/properties/validator';
 import { type BroadcastChannel } from '@ampatspell/tiny/broadcast';
 
-export type MessageModelOptions = {
+export type MessageModelOptions = Readonly<{
   data: MessageData;
   broadcast: BroadcastChannel;
-};
+}>;
 
 export const useMessageModel = (_opts: OptionsInput<MessageModelOptions>) => {
   const opts = options(_opts);
   const broadcast = $derived(opts.broadcast);
+  const data = $derived(opts.data);
 
-  const fields = useDataFields({ data: getter(() => opts.data) });
+  const fields = useDataFields({ data: getter(() => data) });
   const message = fields.field.string('message', { validator: notBlank() });
 
   const isDirty = $derived(fields.isDirty);
