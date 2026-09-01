@@ -14,6 +14,7 @@ export interface FileVariant {
 }
 
 export interface Message {
+  backgroundId: string | null;
   id: string;
   message: string;
 }

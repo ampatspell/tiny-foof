@@ -6,6 +6,7 @@ export const up = async (db: Kysely<any>) => {
     .createTable('messages')
     .addColumn('id', 'text', (col) => col.notNull().primaryKey())
     .addColumn('message', 'text', (col) => col.notNull())
+    .addColumn('background_id', 'text')
     .execute();
 };
 
