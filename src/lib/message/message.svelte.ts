@@ -2,13 +2,16 @@ import { getter, options, type OptionsInput } from '@ampatspell/tiny/utils/optio
 import { updateMessage, type MessageData } from './message.remote';
 import { useDataFields } from '@ampatspell/tiny/fields/data';
 import { notBlank } from '@ampatspell/tiny/properties/validator';
+import { type BroadcastChannel } from '@ampatspell/tiny/broadcast';
 
 export type MessageModelOptions = {
   data: MessageData;
+  broadcast: BroadcastChannel;
 };
 
 export const useMessageModel = (_opts: OptionsInput<MessageModelOptions>) => {
   const opts = options(_opts);
+  const broadcast = $derived(opts.broadcast);
 
   const fields = useDataFields({ data: getter(() => opts.data) });
   const message = fields.field.string('message', { validator: notBlank() });
@@ -21,6 +24,7 @@ export const useMessageModel = (_opts: OptionsInput<MessageModelOptions>) => {
       if (data) {
         const { message } = data;
         await updateMessage({ message });
+        broadcast.notifyDidSave();
       }
     }
   };
