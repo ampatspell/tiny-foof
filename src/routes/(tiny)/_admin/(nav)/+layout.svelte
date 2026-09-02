@@ -15,7 +15,7 @@
       {
         name: 'Public',
         icon: TablerCloud,
-        route: resolve('/'),
+        route: resolve('/(public)'),
       },
       {
         name: 'Message',
@@ -27,10 +27,6 @@
 
   setFloaters();
 </script>
-
-<svelte:head>
-  <title>Tiny backend</title>
-</svelte:head>
 
 <Backend>
   {@render children()}

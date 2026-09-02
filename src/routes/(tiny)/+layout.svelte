@@ -5,7 +5,7 @@
 </script>
 
 <svelte:head>
-  <title>Welcome to Tiny</title>
+  <title>Tiny _admin</title>
 </svelte:head>
 
 <Tiny>

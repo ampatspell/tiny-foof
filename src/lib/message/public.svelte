@@ -8,7 +8,7 @@
   let background = $derived.by(() => {
     const id = record.backgroundId;
     if (id) {
-      return resolve('/files/[id]/[variant]', { id, variant: '2048x2048' });
+      return resolve('/(public)/files/[id]/[variant]', { id, variant: '2048x2048' });
     }
   });
   let version = pkg.version;
