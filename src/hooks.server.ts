@@ -9,7 +9,7 @@ export const handle = createHandle({
     secret: USERS_SECRET,
   },
   files: {
-    thumbnails: [jpeg({ size: 100 }), jpeg({ size: 1024 })],
+    thumbnails: [jpeg({ size: 100 }), jpeg({ size: 1024 }), jpeg({ size: 2048 })],
   },
   logger: createBasicLogger(),
 });

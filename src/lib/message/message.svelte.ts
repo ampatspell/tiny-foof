@@ -1,8 +1,10 @@
 import { getter, options, type OptionsInput } from '@ampatspell/tiny/utils/options';
 import { updateMessage, type MessageData } from './message.remote';
-import { useDataFields } from '@ampatspell/tiny/fields/data';
 import { notBlank } from '@ampatspell/tiny/properties/validator';
 import { type BroadcastChannel } from '@ampatspell/tiny/broadcast';
+import { asFile } from '@ampatspell/tiny/utils/files';
+import { images } from '@ampatspell/tiny/utils/utils';
+import { withDataFields } from '@ampatspell/tiny/fields/data';
 
 export type MessageModelOptions = Readonly<{
   data: MessageData;
@@ -14,28 +16,29 @@ export const useMessageModel = (_opts: OptionsInput<MessageModelOptions>) => {
   const broadcast = $derived(opts.broadcast);
   const data = $derived(opts.data);
 
-  const fields = useDataFields({ data: getter(() => data) });
-  const message = fields.field.string('message', { validator: notBlank() });
-
-  const isDirty = $derived(fields.isDirty);
+  const [fields, state] = withDataFields({
+    data: getter(() => ({
+      ...data,
+      background: asFile(data.background),
+    })),
+  }).define(({ string, file }) => ({
+    message: string('message', { validator: notBlank() }),
+    background: file('background', { accept: images }),
+  }));
 
   const save = async () => {
-    if (fields.touch()) {
-      const data = fields.dirty;
+    if (state.touch()) {
+      const data = state.serialized.dirty;
       if (data) {
-        const { message } = data;
-        await updateMessage({ message });
+        await updateMessage(data);
         broadcast.notifyDidSave();
       }
     }
   };
 
-  const rollback = () => fields.rollback();
-
   return options({
-    message,
-    isDirty: getter(() => isDirty),
+    ...fields,
+    ...state.opts,
     save,
-    rollback,
   });
 };

@@ -7,26 +7,22 @@
   import Form from '@ampatspell/tiny/form/form';
   import Editing from '@ampatspell/tiny/layout/editing/editing';
   import { useEditingLayout } from '@ampatspell/tiny/layout/editing/layout';
-  import { usePropertiesContext } from '@ampatspell/tiny/properties/context';
   import { getter } from '@ampatspell/tiny/utils/options';
 
-  usePropertiesContext();
   let broadcast = useBroadcastChannel();
-
   let data = $derived(await getMessage());
-
   let model = useMessageModel({
     data: getter(() => data),
     broadcast,
   });
-
   let layout = useEditingLayout({ model, title: 'Message' });
 </script>
 
 <Editing {layout}>
-  <Form size="max">
+  <Form size="wide">
     <Content>
       <Fields field={model.message} />
+      <Fields field={model.background} />
     </Content>
   </Form>
 </Editing>
