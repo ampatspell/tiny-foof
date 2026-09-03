@@ -39,7 +39,7 @@
     "#lib/*": "./src/lib/*"
   },
   "dependencies": {
-    "@ampatspell/tiny": "^0.5.7",
+    "@ampatspell/tiny": "^0.5.9",
     "better-sqlite3": "^12.11.1",
     "kysely": "^0.29.5",
     "valibot": "^1.4.2"

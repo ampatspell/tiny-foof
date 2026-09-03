@@ -13,7 +13,7 @@ export const getMessage = query(async () => {
     const backgroundId = uid();
     const buffer = await readFile(fileURLToPath(import.meta.resolve('@ampatspell/tiny/assets/film-0677-011.jpg')));
     const file = new File([buffer], 'film-0677-011.jpg', { type: 'image/jpeg' });
-    await getFiles().store(backgroundId, file);
+    await getFiles().file(backgroundId).store(file);
 
     record = await getDatabase()
       .insertInto('messages')
@@ -28,7 +28,7 @@ export const getMessage = query(async () => {
 
   let background;
   if (record.backgroundId) {
-    background = await getFiles().data(record.backgroundId);
+    background = await getFiles().file(record.backgroundId).load();
   }
 
   return {
@@ -52,7 +52,11 @@ export const updateMessage = command(
     let backgroundId;
     if (background) {
       const message = await db.selectFrom('messages').select('backgroundId').executeTakeFirstOrThrow();
-      backgroundId = await getFiles().replace(message.backgroundId, uid(), background.file);
+      backgroundId = await getFiles().replace({
+        prev: message.backgroundId,
+        next: uid(),
+        file: background.file,
+      });
     }
 
     await db

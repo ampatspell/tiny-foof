@@ -1,7 +1,4 @@
 import { getFiles } from '#lib/services.js';
 import { type RequestHandler } from '@sveltejs/kit';
 
-export const GET: RequestHandler = async ({ params: { id, variant } }) => {
-  const file = await getFiles().get({ id, variant });
-  return file.toResponse();
-};
+export const GET: RequestHandler = ({ params }) => getFiles().handle(params);

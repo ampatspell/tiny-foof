@@ -2,9 +2,9 @@ import { getter, options, type OptionsInput } from '@ampatspell/tiny/utils/optio
 import { updateMessage, type MessageData } from './message.remote';
 import { notBlank } from '@ampatspell/tiny/properties/validator';
 import { type BroadcastChannel } from '@ampatspell/tiny/broadcast';
-import { asFile } from '@ampatspell/tiny/utils/files';
 import { images } from '@ampatspell/tiny/utils/utils';
 import { withDataFields } from '@ampatspell/tiny/fields/data';
+import { asRemoteFile } from '@ampatspell/tiny/utils/files';
 
 export type MessageModelOptions = Readonly<{
   data: MessageData;
@@ -19,7 +19,7 @@ export const useMessageModel = (_opts: OptionsInput<MessageModelOptions>) => {
   const [fields, state] = withDataFields({
     data: getter(() => ({
       ...data,
-      background: asFile(data.background),
+      background: asRemoteFile(data.background),
     })),
   }).define(({ string, file }) => ({
     message: string('message', { validator: notBlank() }),
