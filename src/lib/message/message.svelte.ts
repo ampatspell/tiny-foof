@@ -4,7 +4,7 @@ import { notBlank } from '@ampatspell/tiny/properties/validator';
 import { type BroadcastChannel } from '@ampatspell/tiny/broadcast';
 import { images } from '@ampatspell/tiny/utils/utils';
 import { withDataFields } from '@ampatspell/tiny/fields/data';
-import { asRemoteFile } from '@ampatspell/tiny/utils/files';
+import { useFiles } from '@ampatspell/tiny/files';
 
 export type MessageModelOptions = Readonly<{
   data: MessageData;
@@ -12,6 +12,7 @@ export type MessageModelOptions = Readonly<{
 }>;
 
 export const useMessageModel = (_opts: OptionsInput<MessageModelOptions>) => {
+  const files = useFiles();
   const opts = options(_opts);
   const broadcast = $derived(opts.broadcast);
   const data = $derived(opts.data);
@@ -19,7 +20,7 @@ export const useMessageModel = (_opts: OptionsInput<MessageModelOptions>) => {
   const [fields, state] = withDataFields({
     data: getter(() => ({
       ...data,
-      background: asRemoteFile(data.background),
+      background: files.asRemote(data.background),
     })),
   }).define(({ string, file }) => ({
     message: string('message', { validator: notBlank() }),
