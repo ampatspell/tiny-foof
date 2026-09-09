@@ -7,6 +7,10 @@ export const handle = createHandle({
   dir: STORAGE_ROOT,
   users: {
     secret: USERS_SECRET,
+    roles: {
+      admin: 'admin',
+      default: 'subscriber',
+    },
   },
   files: {
     thumbnails: {

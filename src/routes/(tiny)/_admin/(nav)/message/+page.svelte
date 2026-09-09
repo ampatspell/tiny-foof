@@ -15,14 +15,17 @@
     data: getter(() => data),
     broadcast,
   });
-  let layout = useEditingLayout({ model, title: 'Message' });
+  let layout = useEditingLayout({
+    model,
+    title: 'Message',
+  });
 </script>
 
 <Editing {layout}>
   <Form size="wide">
     <Content>
-      <Fields field={model.message} />
-      <Fields field={model.background} />
+      <Fields field={model.fields.message} />
+      <Fields field={model.fields.background} />
     </Content>
   </Form>
 </Editing>

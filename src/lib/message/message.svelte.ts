@@ -1,10 +1,10 @@
 import { getter, options, type OptionsInput } from '@ampatspell/tiny/utils/options';
 import { updateMessage, type MessageData } from './message.remote';
-import { notBlank } from '@ampatspell/tiny/properties/validator';
 import { type BroadcastChannel } from '@ampatspell/tiny/broadcast';
 import { images } from '@ampatspell/tiny/utils/utils';
-import { withDataFields } from '@ampatspell/tiny/fields/data';
 import { useFiles } from '@ampatspell/tiny/files';
+import { withDataFields } from '@ampatspell/tiny/fields/index';
+import { notBlank } from '@ampatspell/tiny/fields/models/validator';
 
 export type MessageModelOptions = Readonly<{
   data: MessageData;
@@ -17,7 +17,7 @@ export const useMessageModel = (_opts: OptionsInput<MessageModelOptions>) => {
   const broadcast = $derived(opts.broadcast);
   const data = $derived(opts.data);
 
-  const [fields, state] = withDataFields({
+  const fields = withDataFields({
     data: getter(() => ({
       ...data,
       background: files.asRemote(data.background),
@@ -28,8 +28,8 @@ export const useMessageModel = (_opts: OptionsInput<MessageModelOptions>) => {
   }));
 
   const save = async () => {
-    if (state.touch()) {
-      const data = state.serialized.dirty;
+    if (fields.touch()) {
+      const data = fields.serialized.dirty;
       if (data) {
         await updateMessage(data);
         broadcast.notifyDidSave();
@@ -37,9 +37,5 @@ export const useMessageModel = (_opts: OptionsInput<MessageModelOptions>) => {
     }
   };
 
-  return options({
-    ...fields,
-    ...state.opts,
-    save,
-  });
+  return fields.asEditable({ save });
 };
