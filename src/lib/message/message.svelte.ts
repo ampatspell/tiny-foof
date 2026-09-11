@@ -5,6 +5,7 @@ import { images } from '@ampatspell/tiny/utils/utils';
 import { useFiles } from '@ampatspell/tiny/files';
 import { withDataFields } from '@ampatspell/tiny/fields/index';
 import { notBlank } from '@ampatspell/tiny/fields/models/validator';
+import { resolve } from '$app/paths';
 
 export type MessageModelOptions = Readonly<{
   data: MessageData;
@@ -24,7 +25,7 @@ export const useMessageModel = (_opts: OptionsInput<MessageModelOptions>) => {
     })),
   }).define(({ string, file }) => ({
     message: string('message', { validator: notBlank() }),
-    background: file('background', { accept: images }),
+    background: file('background', { accept: images, variant: '1024x1024' }),
   }));
 
   const save = async () => {
@@ -37,5 +38,12 @@ export const useMessageModel = (_opts: OptionsInput<MessageModelOptions>) => {
     }
   };
 
-  return fields.asEditable({ save });
+  const title = 'Message';
+  const route = resolve('/');
+
+  return fields.asEditable({
+    save,
+    title,
+    route,
+  });
 };

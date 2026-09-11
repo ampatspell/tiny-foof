@@ -17,7 +17,6 @@
   });
   let layout = useEditingLayout({
     model,
-    title: 'Message',
   });
 </script>
 
