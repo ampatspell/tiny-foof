@@ -24,7 +24,7 @@ export const useMessageModel = (_opts: OptionsInput<MessageModelOptions>) => {
       background: files.asRemote(data.background),
     })),
   }).define(({ string, file }) => ({
-    message: string('message', { validator: notBlank() }),
+    message: string('message', { validator: notBlank }),
     background: file('background', { accept: images, variant: '1024x1024' }),
   }));
 

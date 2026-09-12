@@ -1,7 +1,7 @@
 import { getDatabase, getFiles } from '#lib/services.js';
 import { command, query } from '$app/server';
 import { uid } from '@ampatspell/tiny/server/utils';
-import { omit } from '@ampatspell/tiny/utils/object';
+import { hasValues, omit } from '@ampatspell/tiny/utils/object';
 import type { QueryResponse } from '@ampatspell/tiny/utils/utils';
 import { readFile } from 'fs/promises';
 import { fileURLToPath } from 'url';
@@ -49,20 +49,21 @@ export const updateMessage = command(
     const { background } = props;
     const rest = omit(props, ['background']);
 
-    let backgroundId;
     if (background) {
       const message = await db.selectFrom('messages').select('backgroundId').executeTakeFirstOrThrow();
-      backgroundId = await getFiles().replace({
+      await getFiles().replace({
         prev: message.backgroundId,
-        next: uid(),
         file: background.file,
+        update: (backgroundId) => db.updateTable('messages').set({ backgroundId }).execute(),
       });
     }
 
-    await db
-      .updateTable('messages')
-      .set({ ...rest, backgroundId })
-      .execute();
+    if (hasValues(rest)) {
+      await db
+        .updateTable('messages')
+        .set({ ...rest })
+        .execute();
+    }
 
     getMessage().refresh();
   },
