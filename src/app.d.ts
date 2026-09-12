@@ -1,5 +1,6 @@
 // See https://svelte.dev/docs/kit/types#app.d.ts
 
+import type { roles } from './env';
 import type { Variants } from './params';
 
 // for information about these interfaces
@@ -14,7 +15,7 @@ declare global {
 
   namespace Tiny {
     export type Thumbnail = Variants;
-    export type Role = 'admin' | 'subscriber';
+    export type Role = (typeof roles)[number];
   }
 }
 

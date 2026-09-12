@@ -1,8 +1,10 @@
 import { useBroadcastChannel } from '@ampatspell/tiny/broadcast';
 import { withDataFields } from '@ampatspell/tiny/fields/index';
-import { notBlank, optionalPassword, requiredEmail } from '@ampatspell/tiny/fields/models/validator';
+import { optionalPassword, requiredEmail } from '@ampatspell/tiny/fields/models/validator';
 import { getter, options, type OptionsInput } from '@ampatspell/tiny/utils/options';
-import { updateUser, type UserData } from './users.remote';
+import { sentenceCase } from '@ampatspell/tiny/utils/string';
+import { roles } from '../../env.ts';
+import { updateUser, type UserData } from './users.remote.ts';
 
 export type UseUserModelOptions = {
   data: UserData;
@@ -17,13 +19,17 @@ export const useUserModel = (_opts: OptionsInput<UseUserModelOptions>) => {
 
   const fields = withDataFields({
     data: getter(() => ({ ...data, password: '' })),
-  }).define(({ string }) => {
+  }).define(({ string, dropdown }) => {
+    const items = roles.map((role) => {
+      return { role, label: sentenceCase(role) };
+    });
     return {
       email: string('email', { validator: requiredEmail }),
-      role: string('role', { validator: notBlank }),
+      role: dropdown('role', { items, identifier: 'role' }),
       password: string('password', {
+        label: 'New password',
+        description: 'Leave blank to keep the current one',
         validator: optionalPassword,
-        description: 'Leave blank to keep the current password',
         type: 'password',
       }),
     };
@@ -42,7 +48,7 @@ export const useUserModel = (_opts: OptionsInput<UseUserModelOptions>) => {
 
   return fields.asEditable({
     save,
-    route: undefined,
+    route: null,
     title: getter(() => data.email),
   });
 };
