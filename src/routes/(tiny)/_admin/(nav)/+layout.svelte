@@ -8,6 +8,7 @@
   import LucideCat from '@ampatspell/tiny/icons/lucide--cat';
   import TablerBalloon from '@ampatspell/tiny/icons/tabler--balloon';
   import TablerCloud from '@ampatspell/tiny/icons/tabler--cloud';
+  import TablerUser from '@ampatspell/tiny/icons/tabler--user';
   import type { Snippet } from 'svelte';
 
   let { children }: { children: Snippet } = $props();
@@ -30,6 +31,12 @@
         name: 'Message',
         icon: TablerBalloon,
         route: resolve('/(tiny)/_admin/(nav)/message'),
+      },
+      {
+        name: 'Users',
+        icon: TablerUser,
+        route: resolve('/(tiny)/_admin/(nav)/users'),
+        select: (id) => resolve('/(tiny)/_admin/(nav)/users/[id]', { id }),
       },
     ],
   });
