@@ -42,10 +42,11 @@
       justify-content: center;
       background: var(--background) center center / cover no-repeat;
       > .message {
-        font-size: var(--tiny-font-size-small);
+        font-size: 13px;
         color: #000;
         display: flex;
         flex-direction: column;
+        gap: 2px;
       }
     }
   }
