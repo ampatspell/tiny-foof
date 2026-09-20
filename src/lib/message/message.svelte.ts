@@ -39,7 +39,7 @@ export const useMessageModel = (_opts: OptionsInput<MessageModelOptions>) => {
   };
 
   const title = 'Message';
-  const route = resolve('/');
+  const route = resolve('/(pub)');
 
   return fields.asEditable({
     save,

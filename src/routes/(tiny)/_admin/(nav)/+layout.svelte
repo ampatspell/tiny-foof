@@ -18,7 +18,7 @@
       {
         name: 'Public',
         icon: TablerCloud,
-        route: resolve('/'),
+        route: resolve('/(pub)'),
         cmp: equals,
       },
       {
