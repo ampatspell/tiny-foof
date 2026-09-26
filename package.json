@@ -17,7 +17,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
-    "@sveltejs/adapter-node": "^6.0.0-next.12",
+    "@sveltejs/adapter-node": "^6.0.0-next.14",
     "@sveltejs/kit": "next",
     "@sveltejs/vite-plugin-svelte": "^7.1.2",
     "@types/node": "^24",
@@ -27,7 +27,7 @@
     "globals": "^17.6.0",
     "prettier": "^3.8.3",
     "prettier-plugin-svelte": "^4.1.0",
-    "sass-embedded": "^1.104.1",
+    "sass-embedded": "^1.105.0",
     "svelte": "^5.56.1",
     "svelte-check": "^4.6.0",
     "typescript": "^6.0.3",
@@ -39,7 +39,7 @@
     "#lib/*": "./src/lib/*"
   },
   "dependencies": {
-    "@ampatspell/tiny": "^0.15.1",
+    "@ampatspell/tiny": "^0.16.0",
     "better-sqlite3": "^12.11.1",
     "kysely": "^0.29.6",
     "valibot": "^1.5.0"
