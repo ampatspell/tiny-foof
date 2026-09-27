@@ -6,6 +6,7 @@ import { useFiles } from '@ampatspell/tiny/files';
 import { withDataFields } from '@ampatspell/tiny/fields/index';
 import { notBlank } from '@ampatspell/tiny/fields/models/validator';
 import { resolve } from '$app/paths';
+import { asAction } from '@ampatspell/tiny/utils/action';
 
 export type MessageModelOptions = Readonly<{
   data: MessageData;
@@ -39,7 +40,7 @@ export const useMessageModel = (_opts: OptionsInput<MessageModelOptions>) => {
   };
 
   const title = 'Message';
-  const route = resolve('/(pub)');
+  const route = asAction(resolve('/(pub)'));
 
   return fields.asEditable({
     save,

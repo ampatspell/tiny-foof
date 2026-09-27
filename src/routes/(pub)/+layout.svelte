@@ -1,6 +1,9 @@
 <script lang="ts">
+  import Fonts from '@ampatspell/tiny/fonts';
   let { children } = $props();
 </script>
+
+<Fonts fonts={{ families: { 'Azeret Mono': [400] }, display: 'swap' }} />
 
 <div class="pub">
   {@render children()}
@@ -12,7 +15,7 @@
     display: flex;
     flex-direction: column;
     font-family:
-      Menlo,
+      'Azeret Mono',
       Ubuntu Mono,
       monospace;
   }
