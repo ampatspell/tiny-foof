@@ -25,6 +25,12 @@ export const handle = createHandle({
 });
 
 export const handleError: HandleServerError = async ({ error }) => {
+  if (error instanceof Error) {
+    console.error(error.stack);
+  } else {
+    console.error(error);
+  }
+
   if (error instanceof NoResultError) {
     return {
       status: 404,
